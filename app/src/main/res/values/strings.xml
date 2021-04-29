@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CNNReader</string>
+    <string name="newsSource">news_source</string>
+    <string name="NewsSourceTitle">News Source</string>
+    <string name="settings">Settings</string>
+    <string name="item_pub_date">Published: Tues 15 Sept 2015</string>
+    <string name="item_title">Item Title</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="item_description">Item description</string>
+    <string name="item_link">Read more on the web</string>
+    <string name="notification_channel_name">CNNReader</string>
+    <string name="new_articles_title">New CNN Articles</string>
+    <string name="new_articles_text">You have new CNN Articles in CNNReader.</string>
+</resources>
