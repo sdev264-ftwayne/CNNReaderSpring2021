@@ -20,11 +20,9 @@ class ArticleRepository private constructor(context: Context) {
     fun getArticles():LiveData<List<Article>> = newsDao.getArticles()
     fun getArticle(id : UUID) : LiveData<Article> = newsDao.getArticle(id)
 
-    fun getFeedInfo():FeedInfo? {
+    suspend fun getFeedInfo():FeedInfo? {
         var feedInfo : FeedInfo? = null
-        executor.execute {
-           feedInfo =  newsDao.getFeedInfo()
-        }
+        newsDao.getFeedInfo().also { feedInfo = it }
         return feedInfo
     }
     fun deleteArticles() = newsDao.deleteArticles()

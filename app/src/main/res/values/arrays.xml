@@ -1,0 +1,34 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="feed_entries">
+        <item>Top Stories</item>
+        <item>World</item>
+        <item>U.S.</item>
+        <item>Business</item>
+        <item>Politics</item>
+        <item>Technology</item>
+        <item>Health</item>
+        <item>Entertainment</item>
+        <item>Travel</item>
+        <item>Video</item>
+        <item>CNN 10</item>
+        <item>Most Recent</item>
+        <item>CNN Underscored</item>
+    </string-array>
+
+    <string-array name="feed_values">
+        <item>http://rss.cnn.com/rss/cnn_topstories.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_world.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_us.rss</item>
+        <item>http://rss.cnn.com/rss/money_latest.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_allpolitics.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_tech.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_health.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_showbiz.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_travel.rss</item>
+        <item>http://rss.cnn.com/rss/cnn_freevideo.rss</item>
+        <item>http://rss.cnn.com/services/podcasting/cnn10/rss.xml</item>
+        <item>http://rss.cnn.com/rss/cnn_latest.rss</item>
+        <item>Chttp://rss.cnn.com/cnn-underscored</item>
+    </string-array>
+</resources>

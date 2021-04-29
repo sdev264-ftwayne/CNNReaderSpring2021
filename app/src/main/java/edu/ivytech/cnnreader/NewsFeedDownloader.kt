@@ -2,6 +2,7 @@ package edu.ivytech.cnnreader
 
 import android.content.Context
 import android.util.Log
+import androidx.preference.PreferenceManager
 import org.xml.sax.InputSource
 import org.xml.sax.XMLReader
 import java.io.FileInputStream
@@ -14,11 +15,13 @@ import javax.xml.parsers.SAXParserFactory
 import kotlin.math.abs
 
 class NewsFeedDownloader(var context: Context) {
-    val CNN_URL = "http://rss.cnn.com/rss/cnn_showbiz.rss"
+    var CNN_URL = "http://rss.cnn.com/rss/cnn_showbiz.rss"
     val TAG = "Feed Downloader"
     val FILENAME = "news_feed.xml"
 
-    fun downloadFeed() {
+    suspend fun downloadFeed() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        CNN_URL = sharedPreferences.getString(context.getString(R.string.feed_key),"http://rss.cnn.com/rss/cnn_showbiz.rss").toString()
         try {
             val url = URL(CNN_URL)
             val inStream: InputStream = url.openStream()

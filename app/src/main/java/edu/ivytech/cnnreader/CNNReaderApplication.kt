@@ -4,10 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -18,25 +15,8 @@ class CNNReaderApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         ArticleRepository.initialize(this)
-        val articleRepository = ArticleRepository.get()
-        val executor = Executors.newSingleThreadExecutor()
-
-        val feedInfo = articleRepository.getFeedInfo()
-        if(feedInfo == null)
-        {
-            var feed = FeedInfo()
-            articleRepository.addFeedInfo(feed)
-        }
-
-        val current = Date()
-        val diffMillis : Long = abs(current.time - (feedInfo?.getPubDateLong() ?:0 ))
-        if(TimeUnit.HOURS.convert(diffMillis, TimeUnit.MILLISECONDS) > 24 || feedInfo == null)
-        {
-            executor.execute {
-                val newsFeedDownloader = NewsFeedDownloader(this)
-                newsFeedDownloader.downloadFeed()
-            }
-        }
+        val initialDownloadWorker = OneTimeWorkRequest.from(DownloadWorker::class.java)
+        WorkManager.getInstance(this).enqueue(initialDownloadWorker)
 
         val downloadWorkRequest : PeriodicWorkRequest =
             PeriodicWorkRequestBuilder<DownloadWorker>(1, TimeUnit.DAYS).build()

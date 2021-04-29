@@ -24,7 +24,7 @@ interface NewsDao {
     fun updateFeedInfo(feedInfo: FeedInfo)
 
     @Query("select * from feedinfo where id = 1")
-    fun getFeedInfo():FeedInfo?
+    suspend fun getFeedInfo():FeedInfo?
 
     @Insert
     fun addFeedInfo(feedInfo: FeedInfo)

@@ -5,7 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import edu.ivytech.cnnreader.databinding.ActivityMainBinding
 import java.util.*
 
@@ -36,6 +41,28 @@ class MainActivity : AppCompatActivity(), NewsListFragment.Callbacks {
             .addToBackStack(null)
             .commit()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater:MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_refresh -> {
+                val refresh = OneTimeWorkRequest.from(DownloadWorker::class.java)
+                WorkManager.getInstance(this).enqueue(refresh)
+                return true
+            }
+            R.id.menu_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else-> return super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {
